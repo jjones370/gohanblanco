@@ -31,5 +31,32 @@ private int exp;
 	 spdef += a[4];
 	 hp += a[5];
  }
- 
+ public int getExp()
+ 	{
+	return exp; 
+ 	}
+public int getHp()
+	{
+	return hp;
+	}
+public int getDefense()
+	{
+	return def;
+	}
+public int getSpeed()
+	{
+	return spd;
+	}
+public int getSpecialD()
+	{
+	return spdef;
+	}
+public int getAttack()
+	{
+	return atk;
+	}	
+public int getSpecialA()
+	{
+	return spatk;
+	}	
 }
