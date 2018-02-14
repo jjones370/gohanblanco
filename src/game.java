@@ -11,6 +11,7 @@ public class game extends JFrame implements ActionListener{
    Container contentPane = getContentPane();
    JPanel grid = new JPanel(new GridLayout(3,3));
    hero player = new hero();
+   int turncounter = 0;
    public game(hero h,ImageIcon b)
    {
       super ( "Swing Window" );
@@ -25,7 +26,10 @@ public class game extends JFrame implements ActionListener{
       attack.addActionListener( this );
       //skills.addActionListener( this );
       flee.addActionListener( this );
-      
+      if(turncounter%2 == 0)
+      {
+    	  takeattack();
+      }
     
       setVisible( true );
       add( game1 );
@@ -36,6 +40,7 @@ public class game extends JFrame implements ActionListener{
 	   if( event.getSource() == attack )
 	   {
 		   dealattack();
+		   turncounter += 1;
 	   }
 	   /*else if ( event.getSource() == skills);
 	   {
@@ -43,7 +48,16 @@ public class game extends JFrame implements ActionListener{
 	   }*/
 	   else if( event.getSource() == flee)
 	   {
-		   flee(player);
+		  boolean x = flee(player);
+		  if( x == true)
+		  {
+			  int done = 22;
+			  setVisible( false );
+		  }
+		  else
+		  {
+			  turncounter += 1;
+		  }
 	   }
    }
    public static void main(String[]args){
