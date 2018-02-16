@@ -9,6 +9,9 @@ private int def;
 private int spatk;
 private int spdef;
 private int exp;
+private int lvl;
+private int maxexp;
+//private int lvlup[];
 
  public hero()
  {
@@ -19,17 +22,23 @@ private int exp;
 	 spdef = 10;
 	 hp = 20;
 	 exp = 0;
+    lvl =1;
+    maxexp = 20;
+    //for(int i = 0; i<5;i++)
+      //{
+      //lvlup[i] = 1;
+     // } I tried to make a lvlup int array but I kept getting a null pointer exception I'm just gonna leave this in for now and see if we can use it later.
  }
  
- public void levelUP(int[]a)
+ public void levelUP()
  {
-	 exp = 0;
-	 atk += a[0];
-	 def += a[1];
-	 spd += a[2];
-	 spatk += a[3];
-	 spdef += a[4];
-	 hp += a[5];
+	 exp = exp-maxexp;
+	 atk += lvlup[0];
+	 def += lvlup[1];
+	 spd += lvlup[2];
+	 spatk += lvlup[3];
+	 spdef += lvlup[4];
+	 hp += lvlup[5];
  }
  public int getExp()
  	{

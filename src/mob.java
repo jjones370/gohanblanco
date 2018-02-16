@@ -7,7 +7,16 @@ public class mob {
 	public int spatk;
 	public int spdef;
 	public ImageIcon image;
-   public String name;
+mob(int a, int h, int s, int d, int spa, int sp, ImageIcon i )
+   {
+   atk = a;
+   hp =h;
+   spd = s;
+   def = d;
+   spatk = spa;
+   spdef = sp;
+   image = i;
+   }
 public int getHp()
 	{
 	return hp;
@@ -36,8 +45,4 @@ public ImageIcon getImage()
    {
    return image;
    }   
-public String getName()
-   {
-   return name;
-   }
 }

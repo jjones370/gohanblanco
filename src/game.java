@@ -5,20 +5,19 @@ import java.util.*;
 public class game extends JFrame implements ActionListener{
 //this class is the main and is responsible for making the game run
    JPanel game1 = new JPanel();
-   JButton attack = new JButton( "Attack" );
-   JButton flee = new JButton( "Flee" );
+   JButton attack = new JButton("Attack");
+   JButton flee = new JButton("Flee");
    //JButton skills = new JButton( "Skills" );
    Container contentPane = getContentPane();
    JPanel grid = new JPanel(new GridLayout(3,3));
    hero player = new hero();
-   int turncounter = 0;
-   public game(hero h,ImageIcon b)
+   public game(mob m)
    {
       super ( "Swing Window" );
       setSize(1000,1000);
       setDefaultCloseOperation( EXIT_ON_CLOSE );
      
-      JLabel meme = new JLabel("",b,JLabel.CENTER);
+      JLabel meme = new JLabel("",m.getImage(),JLabel.CENTER);
       game1.add(attack);
       game1.add(flee);
       //game1.add(skills);
@@ -26,10 +25,7 @@ public class game extends JFrame implements ActionListener{
       attack.addActionListener( this );
       //skills.addActionListener( this );
       flee.addActionListener( this );
-      if(turncounter%2 == 0)
-      {
-    	  takeattack();
-      }
+      
     
       setVisible( true );
       add( game1 );
@@ -39,8 +35,7 @@ public class game extends JFrame implements ActionListener{
 	   
 	   if( event.getSource() == attack )
 	   {
-		   dealattack();
-		   turncounter += 1;
+		    dealattack();
 	   }
 	   /*else if ( event.getSource() == skills);
 	   {
@@ -48,24 +43,15 @@ public class game extends JFrame implements ActionListener{
 	   }*/
 	   else if( event.getSource() == flee)
 	   {
-		  boolean x = flee(player);
-		  if( x == true)
-		  {
-			  int done = 22;
-			  setVisible( false );
-		  }
-		  else
-		  {
-			  turncounter += 1;
-		  }
+		   flee(player);
 	   }
    }
    public static void main(String[]args){
    	//runs the game
-      cell_dorado cell_dorado = new cell_dorado();
+      mob cell_dorado = new mob(0,0,0,0,0,0,new ImageIcon("cell dorado.png"));
       ImageIcon meme = new ImageIcon("Kamehameha.png");
       
-      game gui = new game(null,cell_dorado.getImage());
+      game gui = new game(cell_dorado);
    }
    public void dealattack(){
    	//when attacking an enemy
