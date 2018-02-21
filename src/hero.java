@@ -35,12 +35,12 @@ private ImageIcon img;
  public void levelUP()
  {
 	 exp = exp-maxexp;
-	 atk += lvlup[0];
-	 def += lvlup[1];
-	 spd += lvlup[2];
-	 spatk += lvlup[3];
-	 spdef += lvlup[4];
-	 hp += lvlup[5];
+	 atk += 1;
+	 def += 1;
+	 spd += 1;
+	 spatk += 1;
+	 spdef += 1;
+	 hp += 1;
  }
  public int getExp()
  	{
