@@ -11,17 +11,21 @@ public class game extends JFrame implements ActionListener{
    Container contentPane = getContentPane();
    JPanel grid = new JPanel(new GridLayout(3,3));
    hero player = new hero();
-   public game(mob m)
+   mob cell_dorado = new mob(15,12,900,6,0,0,new ImageIcon("cell_dorado.png"));
+
+   public game()
    {
       super ( "Swing Window" );
       setSize(1000,1000);
       setDefaultCloseOperation( EXIT_ON_CLOSE );
      
-      JLabel meme = new JLabel("",m.getImage(),JLabel.CENTER);
+      JLabel meme = new JLabel("",cell_dorado.getImage(),JLabel.CENTER);
+      JLabel meme2 = new JLabel("",player.getImage(),JLabel.CENTER);
       game1.add(attack);
       game1.add(flee);
       //game1.add(skills);
       game1.add(meme);
+      game1.add(meme2);
       attack.addActionListener( this );
       //skills.addActionListener( this );
       flee.addActionListener( this );
@@ -35,7 +39,7 @@ public class game extends JFrame implements ActionListener{
 	   
 	   if( event.getSource() == attack )
 	   {
-		    dealattack();
+		   cell_dorado.setHp(dealattack());
 	   }
 	   /*else if ( event.getSource() == skills);
 	   {
@@ -43,25 +47,28 @@ public class game extends JFrame implements ActionListener{
 	   }*/
 	   else if( event.getSource() == flee)
 	   {
-		   flee(player);
+		   flee();
 	   }
    }
    public static void main(String[]args){
    	//runs the game
-      mob cell_dorado = new mob(0,0,0,0,0,0,new ImageIcon("cell dorado.png"));
-      ImageIcon meme = new ImageIcon("Kamehameha.png");
+    //  ImageIcon meme = new ImageIcon("Kamehameha.png");
       
-      game gui = new game(cell_dorado);
+      game gui = new game();
    }
-   public void dealattack(){
+   public int dealattack(){
+	   int dmg = player.getAttack() - (cell_dorado.getDefense()/2);
+	   return dmg;
    	//when attacking an enemy
    }
-   public void takeattack(){
+   public int takeattack(){
    	//when attacked by opponent
+	   int dmg = cell_dorado.getAttack() - (player.getDefense()/2);
+	   return dmg;
    }
-   public boolean flee(hero h){
+   public boolean flee(){
    	//when you wanna be a little weenie
-	   int sp = h.getSpeed();
+	   int sp = player.getSpeed();
 	   boolean escape = false;
 	   Random generator = new Random();
 	   int roll = generator.nextInt(20) + 1;
