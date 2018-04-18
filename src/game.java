@@ -2,17 +2,17 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
-public class game extends JFrame implements ActionListener{
+public class game {
 //this class is the main and is responsible for making the game run
-   JPanel game1 = new JPanel();
-   JButton attack = new JButton("Attack");
-   JButton flee = new JButton("Flee");
+   //JPanel game1 = new JPanel();
+  // JButton attack = new JButton("Attack");
+   //JButton flee = new JButton("Flee");
    //JButton skills = new JButton( "Skills" );
-   Container contentPane = getContentPane();
-   JPanel grid = new JPanel(new GridLayout(3,3));
-   hero player = new hero();
-   mob celldorado = new mob(15,12,900,6,0,0,new ImageIcon("cell1.png"));
-
+   //Container contentPane = getContentPane();
+   //JPanel grid = new JPanel(new GridLayout(3,3));
+   
+   
+/*bit off more than we could chew
    public game()
    {
       super ( "Swing Window" );
@@ -23,7 +23,10 @@ public class game extends JFrame implements ActionListener{
       JLabel meme2 = new JLabel("",player.getImage(),JLabel.CENTER);
       game1.add(attack);
       game1.add(flee);
+      JLabel myText = new JLabel("I'm a label in the window, output : "+celldorado.getHp(),
+    	        SwingConstants.CENTER);
       //game1.add(skills);
+      game1.getContentPane().add(myText, BorderLayout.CENTER);
       game1.add(meme);
       game1.add(meme2);
       attack.addActionListener( this );
@@ -32,8 +35,8 @@ public class game extends JFrame implements ActionListener{
       
     
       setVisible( true );
-      add( game1 );
-   }
+      add( game1 ); 
+   } *//*
    public void  actionPerformed( ActionEvent event )
    {
 	   
@@ -41,24 +44,33 @@ public class game extends JFrame implements ActionListener{
 	   {
 		   celldorado.setHp(dealattack());
 	   }
-	   /*else if ( event.getSource() == skills);
+	   else if ( event.getSource() == skills);
 	   {
 		   
-	   }*/
+	   }
 	   else if( event.getSource() == flee)
 	   {
 		   flee();
 	   }
-   }
+   }*/
    public static void main(String[]args){
+	   hero player = new hero();
+	   mob celldorado = new mob(15,12,900,6,0,0,new ImageIcon("cell1.png"));
    	//runs the game
     //  ImageIcon meme = new ImageIcon("Kamehameha.png");
-      
-      game gui = new game();
+      String [] battleMenu={"Attack","Items","Skills","Flee"};
+      int choice;
+      choice = JOptionPane.showOptionDialog(null,"Cell Dorado appears","Boss fight",1,1,null,battleMenu,battleMenu[0]);
+      //switch(choice){case 0: celldorado.setHP(dealattack()), case 1, case 2, case 3}
+      if(choice == 0){
+    	  //celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()));
+    	  celldorado.setHp(celldorado.getHp()-(player.getAttack()-celldorado.getDefense()));
+      	}
+      }
    }
-   public int dealattack(){
-	   int dmg = player.getAttack() - (celldorado.getDefense()/2);
-	   int chp = celldorado.getHp() - dmg;
+   public int dealattack(int playerAt,int cellD, int cellHP){
+	   int dmg = playerAt - (cellD/2);
+	   int chp = cellHP - dmg;
 	   return chp;
    	//when attacking an enemy
    }
@@ -78,10 +90,6 @@ public class game extends JFrame implements ActionListener{
 		  escape = true;
 	   }
 	   return escape;
-   }
-   public void battle(){
-   	//uses jframe to display the battle
-   	
    }
 
 }

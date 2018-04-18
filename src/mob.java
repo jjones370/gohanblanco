@@ -22,7 +22,7 @@ public int getHp()
 	return hp;
 	}
 public void setHp(int a){
-	hp =- a;
+	hp = a;
 }
 public int getDefense()
 	{
