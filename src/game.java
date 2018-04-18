@@ -11,7 +11,7 @@ public class game extends JFrame implements ActionListener{
    Container contentPane = getContentPane();
    JPanel grid = new JPanel(new GridLayout(3,3));
    hero player = new hero();
-   mob cell_dorado = new mob(15,12,900,6,0,0,new ImageIcon("cell_dorado.png"));
+   mob celldorado = new mob(15,12,900,6,0,0,new ImageIcon("cell1.png"));
 
    public game()
    {
@@ -19,7 +19,7 @@ public class game extends JFrame implements ActionListener{
       setSize(1000,1000);
       setDefaultCloseOperation( EXIT_ON_CLOSE );
      
-      JLabel meme = new JLabel("",cell_dorado.getImage(),JLabel.CENTER);
+      JLabel meme = new JLabel("",celldorado.getImage(),JLabel.CENTER);
       JLabel meme2 = new JLabel("",player.getImage(),JLabel.CENTER);
       game1.add(attack);
       game1.add(flee);
@@ -39,7 +39,7 @@ public class game extends JFrame implements ActionListener{
 	   
 	   if( event.getSource() == attack )
 	   {
-		   cell_dorado.setHp(dealattack());
+		   celldorado.setHp(dealattack());
 	   }
 	   /*else if ( event.getSource() == skills);
 	   {
@@ -57,14 +57,14 @@ public class game extends JFrame implements ActionListener{
       game gui = new game();
    }
    public int dealattack(){
-	   int dmg = player.getAttack() - (cell_dorado.getDefense()/2);
-	   int chp = cell_dorado.getHp() - dmg;
+	   int dmg = player.getAttack() - (celldorado.getDefense()/2);
+	   int chp = celldorado.getHp() - dmg;
 	   return chp;
    	//when attacking an enemy
    }
    public int takeattack(){
    	//when attacked by opponent
-	   int dmg = cell_dorado.getAttack() - (player.getDefense()/2);
+	   int dmg = celldorado.getAttack() - (player.getDefense()/2);
 	   return dmg;
    }
    public boolean flee(){
