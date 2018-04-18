@@ -58,7 +58,8 @@ public class game extends JFrame implements ActionListener{
    }
    public int dealattack(){
 	   int dmg = player.getAttack() - (cell_dorado.getDefense()/2);
-	   return dmg;
+	   int chp = cell_dorado.getHp() - dmg;
+	   return chp;
    	//when attacking an enemy
    }
    public int takeattack(){
