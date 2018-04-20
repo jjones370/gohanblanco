@@ -54,22 +54,28 @@ public class game {
 	   }
    }*/
    public static void main(String[]args){
+	   int turn = 0;
+	   boolean game = true;
 	   hero player = new hero();
 	   mob celldorado = new mob(15,12,900,6,0,0,new ImageIcon("cell1.png"));
    	//runs the game
     //  ImageIcon meme = new ImageIcon("Kamehameha.png");
+	   
+	   if(turn%2 == 0){
+		   //for player turn
       String [] battleMenu={"Attack","Items","Skills","Flee"};
       int choice;
       choice = JOptionPane.showOptionDialog(null,"Cell Dorado appears","Boss fight",1,1,null,battleMenu,battleMenu[0]);
-      switch(choice){case 0: celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()));break;
+      switch(choice){case 0: celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp())); turn += 1;break;
       case 1:break; 
       case 2:break; 
       case 3:}
-      if(choice == 0){
-    	  celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()));
-      	}
-      }
-   
+	   }
+	   else{
+		 //for enemy turn  
+	   turn+= 1;
+	   		}
+	   }
    public static int dealattack(int playerAt,int cellD, int cellHP){
 	   int dmg = playerAt - (cellD/2);
 	   int chp = cellHP - dmg;
