@@ -61,23 +61,25 @@ public class game {
       String [] battleMenu={"Attack","Items","Skills","Flee"};
       int choice;
       choice = JOptionPane.showOptionDialog(null,"Cell Dorado appears","Boss fight",1,1,null,battleMenu,battleMenu[0]);
-      //switch(choice){case 0: celldorado.setHP(dealattack()), case 1, case 2, case 3}
+      switch(choice){case 0: celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()));break;
+      case 1:break; 
+      case 2:break; 
+      case 3:}
       if(choice == 0){
-    	  //celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()));
-    	  celldorado.setHp(celldorado.getHp()-(player.getAttack()-celldorado.getDefense()));
+    	  celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()));
       	}
       }
-   }
-   public int dealattack(int playerAt,int cellD, int cellHP){
+   
+   public static int dealattack(int playerAt,int cellD, int cellHP){
 	   int dmg = playerAt - (cellD/2);
 	   int chp = cellHP - dmg;
 	   return chp;
-   	//when attacking an enemy
    }
-   public int takeattack(){
+   public static int takeattack(int cellAt, int playerDe, int playerhp){
    	//when attacked by opponent
-	   int dmg = celldorado.getAttack() - (player.getDefense()/2);
-	   return dmg;
+	   int dmg = cellAt - (playerDe/2);
+	   int chp = playerhp - dmg;
+	   return chp;
    }
    public boolean flee(){
    	//when you wanna be a little weenie
