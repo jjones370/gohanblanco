@@ -11,8 +11,9 @@ private int spdef;
 private int exp;
 private int lvl;
 private int maxexp;
+private int energy;
 private ImageIcon img;
-//private int lvlup[];
+
 
  public hero()
  {
@@ -25,13 +26,12 @@ private ImageIcon img;
 	 exp = 0;
 	 img = new ImageIcon("joestar.jpg");
     lvl =1;
+    energy =20;
     maxexp = 20;
-    //for(int i = 0; i<5;i++)
-      //{
-      //lvlup[i] = 1;
-     // } I tried to make a lvlup int array but I kept getting a null pointer exception I'm just gonna leave this in for now and see if we can use it later.
+  
+     
  }
- /*
+ 
  public void levelUP()
  {
 	 exp = exp-maxexp;
@@ -45,7 +45,7 @@ private ImageIcon img;
  public int getExp()
  	{
 	return exp; 
- 	}*/
+ 	}
  public ImageIcon getImage()
  {
  return img;
@@ -78,4 +78,25 @@ public int getSpecialA()
 	{
 	return spatk;
 	}	
+public int getEnergy()
+   {
+   return energy;
+   }
+public void setEnergy(int e)
+   {
+   energy += e;
+   }
+public void changeHp(int e)
+   {
+	hp+=e;
+   }
+public void changeAtk(int e)
+	{
+	atk += e;
+	}
+public void setAtk(int e)
+	{
+	atk = e;
+	}
+
 }

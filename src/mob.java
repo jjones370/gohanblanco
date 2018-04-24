@@ -48,4 +48,12 @@ public ImageIcon getImage()
    {
    return image;
    }   
+public void changeaAtk(int e)
+	{
+	atk+= e;
+	}
+public void setAtk(int e)
+	{
+	atk =e;
+	}
 }
