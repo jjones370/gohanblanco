@@ -58,32 +58,34 @@ public class game {
 	   int choice2;
 	   boolean game = true;
 	   boolean failure=false;
+	   int temp;
 	   hero player = new hero();
-	   mob celldorado = new mob(5,50,10,6,0,0,new ImageIcon("cell1.png"));
+	   mob celldorado = new mob(8,30,10,6,0,0,new ImageIcon("cell1.png"));
    	//runs the game
-     ImageIcon blast = new ImageIcon("Kamehameha.png");
+     //ImageIcon blast = new ImageIcon("Kamehameha.png");
 	  while(game==true) 
 	  {	  
 	   if(turn%2 == 0)
       {
 		   //for player turn
+		   temp=0;
       String [] battleMenu={"Attack","Skills","Flee"};
       int choice;
-      choice = JOptionPane.showOptionDialog(null,"That cell dorado is in fighting stance \nYour HP:"+player.getHp() + " Your energry:"+player.getEnergy(),"Boss fight",1,1,null,battleMenu,battleMenu[0]);
+      choice = JOptionPane.showOptionDialog(null,"That cell dorado is in fighting stance \nYour HP:"+player.getHp() + " Your energry:"+player.getEnergy()+ "\nCell Dorado HP:"+celldorado.getHp(),"Boss fight",1,1,null,battleMenu,battleMenu[0]);
       switch(choice)
          {
-      case 0:celldorado.setHp(dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()));turn++;break;
+      case 0: temp = dealattack(player.getAttack(),celldorado.getDefense(),celldorado.getHp()); celldorado.setHp(celldorado.getHp()-temp);JOptionPane.showMessageDialog(null, "You smack Cell for "+temp);turn++;break;
       case 1:choice2 =skills(player.getEnergy());
     	  switch(choice2)
     	  	{
-    	  case 0: player.sethp(20); player.setEnergy(-20);JOptionPane.showMessageDialog(null,"at the cost of 20 energy you heal all of your injuries");break;
-    	  case 1: celldorado.setHp(dealattack(20+player.getAttack(),celldorado.getDefense(),celldorado.getHp())); JOptionPane.showMessageDialog(null,"At the cost of 5 energy you blast cell dorado"); player.setEnergy(-5);break;
-    	  case 2: celldorado.changeaAtk(-3);mobMod+=3; player.setEnergy(-5);JOptionPane.showMessageDialog(null,"at the cost of 5 energy you weaken cell dorado");break;
-    	  case 3: player.changeAtk(3);playerMod+=3;player.setEnergy(-5);JOptionPane.showMessageDialog(null,"at the cost of 5 energy you strengthen");break;
+    	  case 0: player.sethp(20); player.setEnergy(-20);JOptionPane.showMessageDialog(null,"at the cost of 20 energy you heal all of your injuries");turn++;break;
+    	  case 1: temp = dealattack((5+player.getAttack()),celldorado.getDefense(),celldorado.getHp()); celldorado.setHp(celldorado.getHp()-temp); JOptionPane.showMessageDialog(null,"At the cost of 5 energy you blast cell dorado for "+temp); player.setEnergy(-5);turn++;break;
+    	  case 2: celldorado.changeaAtk(-3);mobMod+=3; player.setEnergy(-5);JOptionPane.showMessageDialog(null,"at the cost of 5 energy you weaken cell dorado");turn++;break;
+    	  case 3: player.changeAtk(3);playerMod+=3;player.setEnergy(-5);JOptionPane.showMessageDialog(null,"at the cost of 5 energy you strengthen");turn++;break;
     	  default: break;
     	  	}
     	  break; 
-      case 2:break; 
+      case 2: if(flee(player.getSpeed())==true){JOptionPane.showMessageDialog(null, "You sucessfully escape");game = false; failure=true;}else{JOptionPane.showMessageDialog(null, "You fail to escape");turn++;};break; 
          }
 	   }
 	   
@@ -91,17 +93,16 @@ public class game {
 		 //for enemy turn  
 		   if(turn%5>0)
 		   		{
-			   player.sethp(takeattack(celldorado.getAttack(),player.getDefense(),player.getHp()));
-			   JOptionPane.showMessageDialog(null,"Cell Dorado hits you on the head");
+			   temp = takeattack((celldorado.getAttack()),player.getDefense(),player.getHp());player.sethp(player.getHp()-temp);
+			   JOptionPane.showMessageDialog(null,"Cell Dorado hits you on the head for "+temp);
 		   		}
 		   else
 		   		{
-			   player.sethp(takeattack(5+celldorado.getAttack(),player.getDefense(),player.getHp()));
-			   JOptionPane.showMessageDialog(null,"Cell Dorado hits you with a big chop");
+			   temp = takeattack(5+celldorado.getAttack(),player.getDefense(),player.getHp());player.sethp(player.getHp()-temp);
+			   JOptionPane.showMessageDialog(null,"Cell Dorado hits you with a big chop for "+temp);
 		   		}
 		   turn+= 1;
 		   }
-	   	   }
 	   if(playerMod>0)
 	   	 {
 		playerMod-=1;
@@ -119,40 +120,49 @@ public class game {
 			}
 		 }
 	   if (celldorado.getHp()<=0)
-     	{
-   	game = false;
-     	}
+	   	{
+		   game = false;
+	   	}
 	   else if(player.getHp()<=0)
 	   	{
 		game=false; 
-		failure=false;
+		failure=true;
 	   	}
 	   }
+	  if(failure == true)
+	  {
+		  JOptionPane.showMessageDialog(null, "You lose");
+	  }
+	  else
+	  {
+		  JOptionPane.showMessageDialog(null, "You Defeated the infamous Cell Dorado");
+	  }
+	}
+	   
    
    public static int dealattack(int playerAt,int cellD, int cellHP){
 	   int dmg = playerAt - (cellD/2);
-	   int chp = cellHP - dmg;
-	   return chp;
+	   int chp = (cellHP - dmg);
+	   return dmg;
    }
    public static int takeattack(int cellAt, int playerDe, int playerhp){
    	//when attacked by opponent
 	   int dmg = cellAt - (playerDe/2);
 	   int chp = playerhp - dmg;
-	   return chp;
+	   return dmg;
    }
-   /*public boolean flee(){
+   public static boolean flee(int s){
    	//when you wanna be a little weenie
-	   int sp = player.getSpeed();
 	   boolean escape = false;
 	   Random generator = new Random();
 	   int roll = generator.nextInt(20) + 1;
-	   if(sp > roll)
+	   if(s > roll)
 	   {
 		  escape = true;
 	   }
 	   return escape;
    
-   }*/
+   }
    public static int skills(int e)
       {
       String Skills[] = {"Heal","Blast","Weaken","Bulk Up"};
